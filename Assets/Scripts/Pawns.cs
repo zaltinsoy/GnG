@@ -14,7 +14,7 @@ public class Pawns : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
-        health = 100;
+        health = 300;
         xRange = 30;
         zRange = 20;
     }
@@ -23,7 +23,7 @@ public class Pawns : MonoBehaviour {
     void Update()
     {
 
-
+        //Define the border of the game 
         if (transform.position.x < -xRange)
         {
             transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
@@ -40,6 +40,10 @@ public class Pawns : MonoBehaviour {
         if (transform.position.z > zRange)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, -zRange);
+        }
+
+        if (health<0) { 
+            Destroy(gameObject); 
         }
 
     }
