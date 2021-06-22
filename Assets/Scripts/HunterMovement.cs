@@ -11,7 +11,8 @@ public class HunterMovement : MonoBehaviour
     public int targetEnemy;
     private Pawns pawn;
     private GameObject targetObje;
-    private GameObject[] targetList;
+    //private GameObject[] targetList;
+    private List<GameObject> targetList;
 
     void Start()
     {
@@ -30,8 +31,8 @@ public class HunterMovement : MonoBehaviour
     public void FollowPrey()
     {
 
-      
 
+        /*
         if (pawn.team == "blue")
         {
             if (pawn.type == "rock") { targetList = gSet.rScissList; }
@@ -47,14 +48,44 @@ public class HunterMovement : MonoBehaviour
 
 
         numEnemy = targetList.Length;
+        */
 
-        if (targetEnemy == -1 || targetList[targetEnemy] == null)
+        if (pawn.team == "blue")
         {
-            targetEnemy = Random.Range(0, numEnemy);
+            if (pawn.type == "rock") { targetList = gSet.redScissList; }
+            else if (pawn.type == "scissors") { targetList = gSet.redPaperList; }
+            else if (pawn.type == "paper") { targetList = gSet.redRockList; }
         }
-        Vector3 target = targetList[targetEnemy].transform.position;
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition, target,Time.deltaTime * speed);
+        else if (pawn.team == "red")
+        {
+            if (pawn.type == "rock") { targetList = gSet.blueScissList; }
+            else if (pawn.type == "scissors") { targetList = gSet.bluePaperList; }
+            else if (pawn.type == "paper") { targetList = gSet.blueRockList; }
+        }
 
+
+        //numEnemy = targetList.Length;
+        numEnemy = targetList.Count;
+
+
+        if (numEnemy == 0)
+        {
+
+        }
+
+        else
+        {
+            if (targetEnemy>=numEnemy)
+            {
+                targetEnemy = Random.Range(0, numEnemy);
+            }
+            else if (targetEnemy == -1 || targetList[targetEnemy] == null)
+            {
+                targetEnemy = Random.Range(0, numEnemy);
+            }
+            Vector3 target = targetList[targetEnemy].transform.position;
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, target, Time.deltaTime * speed);
+        }
     }
 
 }
