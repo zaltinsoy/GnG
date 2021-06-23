@@ -9,6 +9,7 @@ public class Pawns : MonoBehaviour {
     public string team;
     private float xRange;
     private float zRange;
+    public int typeNo;
 
 
     // Start is called before the first frame update

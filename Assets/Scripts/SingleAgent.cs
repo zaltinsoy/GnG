@@ -13,17 +13,46 @@ public class SingleAgent : Agent
 {
     private GameSetting gSet;
     private Rigidbody rBody;
-    private float forceMultiplier;
+    private Figth figth;
+    //  private float forceMultiplier;
     private Pawns pawnObje;
     float speed;
+    private float xRange;
+    private float zRange;
+    private string preyType;
+    private string notrType;
+    private string predatorType;
 
     void Start()
     {
         gSet = GameObject.Find("ScriptHolder").GetComponent<GameSetting>();
         rBody = GetComponent<Rigidbody>();
         pawnObje = GetComponent<Pawns>();
-        forceMultiplier = 5;
+        figth = GetComponent<Figth>();
+        // forceMultiplier = 5;
         speed = 5;
+        xRange = 30;
+        zRange = 20;
+        
+
+        if (pawnObje.type == "rock")
+        {
+            preyType = "scissors";
+            notrType = "rock";
+            predatorType = "paper";
+        }
+        else if (pawnObje.type == "scissors")
+        {
+            preyType = "paper";
+            notrType = "scissors";
+            predatorType = "rock";
+        }
+        else if (pawnObje.type == "paper")
+        {
+            preyType = "rock";
+            notrType = "paper";
+            predatorType = "scissors";
+        }
 
     }
 
@@ -37,7 +66,10 @@ public class SingleAgent : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         //burada çeþitli bilgileri yüklüyoruz, agent'ýn bildiði þeyler.
-        sensor.AddObservation(transform.localPosition); //kendi yerini biliyor.
+        //kendi yerinin bilgisi:
+        sensor.AddObservation((transform.localPosition.x + xRange) / (2 * xRange));
+        sensor.AddObservation((transform.localPosition.z + zRange) / (2 * zRange));
+        sensor.AddObservation(GetComponent<Pawns>().typeNo);
 
         //rakibin yeri bilgisi verdik
         /*
@@ -47,10 +79,14 @@ public class SingleAgent : Agent
             sensor.AddObservation(gSet.bList[i].transform);
         }
         */
+        // for (int i = 0; i < gSet.bList.Length; i++)
         for (int i = 0; i < gSet.blueList.Count; i++)
 
         {
-            sensor.AddObservation(gSet.blueList[i].transform);
+            //   sensor.AddObservation(gSet.bList[i].transform.localPosition-transform.localPosition);
+            sensor.AddObservation((gSet.blueList[i].transform.localPosition.x - transform.localPosition.x + xRange) / (2 * xRange));
+            sensor.AddObservation((gSet.blueList[i].transform.localPosition.z - transform.localPosition.z + zRange) / (2 * zRange));
+            sensor.AddObservation(gSet.blueList[i].GetComponent<Pawns>().typeNo);
         }
 
     }
@@ -79,34 +115,40 @@ public class SingleAgent : Agent
 
         // if (gameObject)
 
-        if (gSet.blueList.Count < 2)
+        SetReward(0.01f);
+
+        if(figth.type2==preyType)
+        { SetReward(-1); }
+        else if (figth.type2 == predatorType)
+        { SetReward(-1); }
+        else if(figth.type2==notrType)
+        { SetReward(-1); }
+
+
+        if (gSet.blueList.Count < 1) //win the round
         {
-            SetReward(3);
+            //SetReward(1);
             EndEpisode();
             //Academy.Instance.OnEnvironmentReset();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
-        //if (gSet.rList.Length<3)
-        //if(gSet.remRed<3)
-
-        /*
-        if (gSet.redList.Count < 2)
+        if (gSet.redList.Count < 1) //lost the round
         {
-            SetReward(-1);
+          //  SetReward(-1);
             EndEpisode();
             // SceneManager.LoadScene(SceneManager.GetActiveScene());
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-         */
 
 
-        if (pawnObje.health < 20)
+        if (pawnObje.health < 1) //þunu arttýrabilirim hem deðerini hem etkisini
         {
-            SetReward(-2);
-            EndEpisode();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SetReward(-1);
+            //EndEpisode();
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+
 
     }
 

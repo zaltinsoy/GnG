@@ -19,8 +19,8 @@ public class Figth : MonoBehaviour
 
     Pawns obje1;
     Pawns obje2;
-    string type1;
-    string type2;
+    public string type1;
+    public string type2;
     private Vector3 Vectasor3;
     //  public float speed = 5;
 

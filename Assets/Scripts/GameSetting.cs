@@ -85,10 +85,17 @@ public class GameSetting : MonoBehaviour
 
 
 
-        if(blueList.Count<1||redList.Count<1)
+        if(blueList.Count==2 && redList.Count==2)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+
+        if (blueList.Count == 1 || redList.Count == 1 || blueList.Count==0||redList.Count==0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+
 
         /*
         if (redList.Count < 3)
