@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PreyMovement : MonoBehaviour
 {
-    //public GameObject scripts;
     private GameSetting gSet;
     float speed;
     private int numEnemy;
@@ -22,7 +21,7 @@ public class PreyMovement : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
         RunfromHunter();
     }
@@ -43,7 +42,6 @@ public class PreyMovement : MonoBehaviour
             else if (pawn.type == "scissors") { targetList = gSet.bRockList; }
         }
 
-
         numEnemy = targetList.Length;
 
         if (targetEnemy == -1 || targetList[targetEnemy] == null)
@@ -51,7 +49,7 @@ public class PreyMovement : MonoBehaviour
             targetEnemy = Random.Range(0, numEnemy);
         }
         Vector3 target = targetList[targetEnemy].transform.position;
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition, target, -1*Time.deltaTime * speed);
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, target, -1 * Time.deltaTime * speed);
 
     }
 

@@ -7,10 +7,12 @@ public class SeekerMovement : MonoBehaviour
     //public GameObject scripts;
     private GameSetting gSet;
     float speed;
+   // private Rigidbody rBody;
     private int numEnemy;
     public int targetEnemy;
     private Pawns pawn;
     private List<GameObject> targetList;
+ //   private float forceMultiplier;
 
     void Start()
     {
@@ -18,10 +20,12 @@ public class SeekerMovement : MonoBehaviour
         speed = 5;
         gSet = GameObject.Find("ScriptHolder").GetComponent<GameSetting>();
         pawn = gameObject.GetComponent<Pawns>();
+       // forceMultiplier = 5;
+       // rBody = GetComponent<Rigidbody>();
 
     }
 
-    void Update()
+    void FixedUpdate() //update'ti fixed update yaptým yeni.
     {
         FollowEnemy();
     }
@@ -35,7 +39,7 @@ public class SeekerMovement : MonoBehaviour
         if (numEnemy == 0) { Debug.Log("Oyun Bitti"); }
         else
         {
-            if(targetEnemy >= numEnemy)
+            if (targetEnemy >= numEnemy)
             {
                 targetEnemy = Random.Range(0, numEnemy);
             }
@@ -43,43 +47,12 @@ public class SeekerMovement : MonoBehaviour
             else if (targetEnemy == -1 || targetList[targetEnemy] == null)
             {
                 targetEnemy = Random.Range(0, numEnemy);
-                //Eskiden numEnemy-1'e kadardý, NumEnemy yapýnca sorun çözüldü sonuna kadar arýyor
             }
             Vector3 target = targetList[targetEnemy].transform.position;
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, target, Time.deltaTime * speed);
         }
 
-        /*
-        if (pawn.team == "blue")
-        {
-            //numEnemy = gSet.rList.Length;
-            numEnemy = gSet.redList.Count;
 
-            if (targetEnemy == -1 || gSet.rList[targetEnemy] == null)
-            {
-                targetEnemy = Random.Range(0, numEnemy);
-                //Eskiden numEnemy-1'e kadardý, NumEnemy yapýnca sorun çözüldü sonuna kadar arýyor
-            }
-            Vector3 target = gSet.rList[targetEnemy].transform.position;
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, target, Time.deltaTime * speed);
-            if (numEnemy == 0) { Debug.Log("gameOver"); }
-        }
-        else if (pawn.team == "red")
-        {
-            //numEnemy = gSet.bList.Length;
-            numEnemy = gSet.blueList.Count;
-
-            if (targetEnemy == -1 || gSet.bList[targetEnemy] == null)
-            {
-                targetEnemy = Random.Range(0, numEnemy);
-                //Eskiden numEnemy-1'e kadardý, NumEnemy yapýnca sorun çözüldü sonuna kadar arýyor
-            }
-            Vector3 target = gSet.bList[targetEnemy].transform.position;
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, target, Time.deltaTime * speed);
-            if (numEnemy == 0) { Debug.Log("gameOver"); }
-        }
-
-        */
     }
 
 }

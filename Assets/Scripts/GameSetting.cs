@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class GameSetting : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class GameSetting : MonoBehaviour
     public int remBlue;
     public int remRed;
 
-    public List<GameObject> blueList; //Ýçerde neyin listesini olduðunu tanýmladýk
+    public List<GameObject> blueList; 
     public List<GameObject> redList;
     public List<GameObject> blueRockList;
     public List<GameObject> bluePaperList;
@@ -28,9 +29,11 @@ public class GameSetting : MonoBehaviour
     public List<GameObject> redPaperList;
     public List<GameObject> redScissList;
 
+    //public TextAsset score;
+    public StreamWriter swWriter;
 
-    // Start is called before the first frame update
-    void Start()
+    
+    void Awake ()  //starttý burasý eskiden
     {
 
         bRockList = GameObject.FindGameObjectsWithTag("bRock");
@@ -47,7 +50,7 @@ public class GameSetting : MonoBehaviour
         redPaperList = new List<GameObject>(rPaperList);
         redScissList = new List<GameObject>(rScissList);
 
-
+        //Populate the array of the objects
         rList = rRockList;
         rList = rList.Concat(rScissList).ToArray();
         rList = rList.Concat(rPaperList).ToArray();
@@ -56,26 +59,28 @@ public class GameSetting : MonoBehaviour
         bList = bList.Concat(bScissList).ToArray();
         bList = bList.Concat(bPaperList).ToArray();
 
+        //Populate the list of the objects
         blueList = new List<GameObject>(bList);
         redList = new List<GameObject>(rList);
+       // swWriter = new StreamWriter(Application.dataPath + "\\Score.txt");
+       // RecordScore();
+
     }
 
-    // Update is called once per frame
-    void Update()
+    //void FixedUpdate()
+        void Update()
 
     {
+        
+        //Bu þekilde açýk yazýnca çalýþýyor ama sýkýntýsý diðer türlü sankim?
+        //RecordScore();
 
         remBlue = bList.Count();
         remRed = rList.Count();
 
-
-
-        //blueList.OfType<GameObject>();
-        //blueList.RemoveAll(string.IsNullOrWhiteSpace)
+        //Remove the destroyed objects
         redList.RemoveAll(item => item == null);
         blueList.RemoveAll(item => item == null);
-
-
         blueRockList.RemoveAll(item => item == null);
         bluePaperList.RemoveAll(item => item == null);
         blueScissList.RemoveAll(item => item == null);
@@ -84,6 +89,46 @@ public class GameSetting : MonoBehaviour
         redScissList.RemoveAll(item => item == null);
 
 
+        //Game ending condition:
+
+       // swWriter.WriteLine("deneme89");
+//        swWriter.WriteLine(blueList.Count.ToString() + "," + redList.Count.ToString());
+        
+        /*
+        if (blueList.Count <1 || redList.Count < 1)
+
+
+        {
+            swWriter = new StreamWriter(Application.dataPath + "\\Score.txt");
+            //   RecordScore();
+            swWriter.WriteLine("deneme89");
+            //swWriter.Close();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        */
+
+
+
+
+        //asýl bu aþaðýdaki!!
+
+        /*
+        if (blueList.Count == 0 || redList.Count == 0)
+        {
+            swWriter = new StreamWriter(Application.dataPath + "\\Score.txt",true);
+            //RecordScore();
+             //swWriter.WriteLine("deneme89");
+            swWriter.WriteLine(blueList.Count.ToString()+","+redList.Count.ToString());
+            swWriter.Close();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        */
+
+
+
+
+        //Alternative game end conditions
+        /*
 
         if(blueList.Count==2 && redList.Count==2)
         {
@@ -94,53 +139,29 @@ public class GameSetting : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-
-
+        */
 
         /*
         if (redList.Count < 3)
         {
-          
-            // SceneManager.LoadScene(SceneManager.GetActiveScene());
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            Debug.Log("bitti oyun");
         }
         */
 
 
-        /*
-        bRockList = GameObject.FindGameObjectsWithTag("bRock");
-        bPaperList = GameObject.FindGameObjectsWithTag("bPaper");
-        bScissList = GameObject.FindGameObjectsWithTag("bSciss");
-        rRockList = GameObject.FindGameObjectsWithTag("rRock");
-        rPaperList = GameObject.FindGameObjectsWithTag("rPaper");
-        rScissList = GameObject.FindGameObjectsWithTag("rSciss");
-
-        rList = rRockList;
-        rList = rList.Concat(rScissList).ToArray();
-        rList = rList.Concat(rPaperList).ToArray();
-
-        bList = bRockList;
-        bList = bList.Concat(bScissList).ToArray();
-        bList = bList.Concat(bPaperList).ToArray();
-
-
-        //rList.concat(rPaperList,rPaperList);
-        //                gravy = gravy.Concat(lazy).ToArray();
-        */
-
 
     }
-    /*
-    public static Vector3 moveTowards(Vector3 ini,Vector3 target)
+    public void RecordScore()
     {
-        target-ini
-            
-        return new Vector3d(v.x / mag, v.y / mag, v.z / mag);
+        //swWriter.WriteLine(remBlue.ToString()+","+remRed.ToString());
+        swWriter.WriteLine("deneme89");
+
+        //niye çalýþmýyor burasý!!
+
+        //File.WriteAllText(Application.dataPath + "/score.txt",remBlue.ToString());
+      //  swWriter.Flush();
+
+
+      // swWriter.Close();
     }
-    */
-
-
-
-
 }

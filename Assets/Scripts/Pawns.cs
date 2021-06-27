@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pawns : MonoBehaviour { 
+public class Pawns : MonoBehaviour
+{
 
     public double health;
     public string type;
@@ -12,7 +13,6 @@ public class Pawns : MonoBehaviour {
     public int typeNo;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         health = 300;
@@ -20,59 +20,80 @@ public class Pawns : MonoBehaviour {
         zRange = 20;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        //Define the border of the game - düþüþlü mod
 
-        //Define the border of the game 
-       
-       if (transform.position.x < -xRange)
-       {
-           transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
-       }
-       if (transform.position.x > xRange)
-       {
-           transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
-       }
-
-       if (transform.position.z < -zRange)
-       {
-           transform.position = new Vector3(transform.position.x, transform.position.y, -zRange);
-       }
-       if (transform.position.z > zRange)
-       {
-           transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
-       }
-
-       //kenara gelince ýþýnlanma aþaðýsý
-       /*
-       if (transform.position.x < -xRange)
-       {
-           transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
-       }
-       if (transform.position.x > xRange)
-       {
-           transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
-       }
-
-       if (transform.position.z < -zRange)
-       {
-           transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
-       }
-       if (transform.position.z > zRange)
-       {
-           transform.position = new Vector3(transform.position.x, transform.position.y, -zRange);
-       }
-       */
-
-
-
-
-        if (health<0) { 
-            Destroy(gameObject); 
+        if (transform.position.x < -xRange)
+        {
+            health -= 10;
+        }
+        if (transform.position.x > xRange)
+        {
+            health -= 10;
         }
 
+        if (transform.position.z < -zRange)
+        {
+            health -= 10;
+        }
+        if (transform.position.z > zRange)
+        {
+            health -= 10;
+        }
+        if (health < 0)
+        {
+            Destroy(gameObject);
+        }
+
+
+        //Define the border of the game 
+        //kenara gelince takýlý kalýyor bunda
+        /*
+        if (transform.position.x < -xRange)
+        {
+            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+        }
+        if (transform.position.x > xRange)
+        {
+            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+        }
+
+        if (transform.position.z < -zRange)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, -zRange);
+        }
+        if (transform.position.z > zRange)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
+        }
+        */
+
+
+        //kenara gelince ýþýnlanma aþaðýsý
+        /*
+        if (transform.position.x < -xRange)
+        {
+            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+        }
+        if (transform.position.x > xRange)
+        {
+            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+        }
+
+        if (transform.position.z < -zRange)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
+        }
+        if (transform.position.z > zRange)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, -zRange);
+        }
         
+        */
+
+
+
     }
-  
+
 }

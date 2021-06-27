@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class HunterMovement : MonoBehaviour
 {
-    //public GameObject scripts;
     private GameSetting gSet;
     float speed;
     private int numEnemy;
     public int targetEnemy;
     private Pawns pawn;
-    private GameObject targetObje;
-    //private GameObject[] targetList;
     private List<GameObject> targetList;
 
     void Start()
@@ -23,32 +20,13 @@ public class HunterMovement : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
         FollowPrey();
     }
 
     public void FollowPrey()
     {
-
-
-        /*
-        if (pawn.team == "blue")
-        {
-            if (pawn.type == "rock") { targetList = gSet.rScissList; }
-            else if (pawn.type == "scissors") { targetList = gSet.rPaperList; }
-            else if (pawn.type == "paper") { targetList = gSet.rRockList; }
-        }
-        else if (pawn.team == "red")
-        {
-            if (pawn.type == "rock") { targetList = gSet.bScissList; }
-            else if (pawn.type == "scissors") { targetList = gSet.bPaperList; }
-            else if (pawn.type == "paper") { targetList = gSet.bRockList; }
-        }
-
-
-        numEnemy = targetList.Length;
-        */
 
         if (pawn.team == "blue")
         {
@@ -63,8 +41,6 @@ public class HunterMovement : MonoBehaviour
             else if (pawn.type == "paper") { targetList = gSet.blueRockList; }
         }
 
-
-        //numEnemy = targetList.Length;
         numEnemy = targetList.Count;
 
 
@@ -75,7 +51,7 @@ public class HunterMovement : MonoBehaviour
 
         else
         {
-            if (targetEnemy>=numEnemy)
+            if (targetEnemy >= numEnemy)
             {
                 targetEnemy = Random.Range(0, numEnemy);
             }
