@@ -109,21 +109,19 @@ public class GameSetting : MonoBehaviour
 
 
 
-
+         
         //asýl bu aþaðýdaki!!
 
-        /*
         if (blueList.Count == 0 || redList.Count == 0)
         {
-            swWriter = new StreamWriter(Application.dataPath + "\\Score.txt",true);
+          swWriter = new StreamWriter(Application.dataPath + "\\Score.txt",true);
             //RecordScore();
-             //swWriter.WriteLine("deneme89");
-            swWriter.WriteLine(blueList.Count.ToString()+","+redList.Count.ToString());
-            swWriter.Close();
+         //   swWriter.WriteLine("deneme89");
+          swWriter.WriteLine(blueList.Count.ToString()+","+redList.Count.ToString());
+          swWriter.Close();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
-        */
-
+        
 
 
 
@@ -154,13 +152,13 @@ public class GameSetting : MonoBehaviour
     public void RecordScore()
     {
         //swWriter.WriteLine(remBlue.ToString()+","+remRed.ToString());
-        swWriter.WriteLine("deneme89");
+        //swWriter.WriteLine("deneme89");
 
         //niye çalýþmýyor burasý!!
 
         //File.WriteAllText(Application.dataPath + "/score.txt",remBlue.ToString());
       //  swWriter.Flush();
-
+      
 
       // swWriter.Close();
     }

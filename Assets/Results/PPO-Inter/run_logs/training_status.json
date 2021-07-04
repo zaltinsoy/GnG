@@ -1,0 +1,47 @@
+{
+    "SingleAgent": {
+        "checkpoints": [
+            {
+                "steps": 499982,
+                "file_path": "results\\77-10v10-1M-Longer\\SingleAgent\\SingleAgent-499982.onnx",
+                "reward": 0.6222221420870887,
+                "creation_time": 1624609680.908004,
+                "auxillary_file_paths": [
+                    "results\\77-10v10-1M-Longer\\SingleAgent\\SingleAgent-499982.pt"
+                ]
+            },
+            {
+                "steps": 999995,
+                "file_path": "results\\77-10v10-1M-Longer\\SingleAgent\\SingleAgent-999995.onnx",
+                "reward": 0.6795998960733414,
+                "creation_time": 1624611163.7811003,
+                "auxillary_file_paths": [
+                    "results\\77-10v10-1M-Longer\\SingleAgent\\SingleAgent-999995.pt"
+                ]
+            },
+            {
+                "steps": 1000193,
+                "file_path": "results\\77-10v10-1M-Longer\\SingleAgent\\SingleAgent-1000193.onnx",
+                "reward": 0.5141175696078468,
+                "creation_time": 1624611163.8523364,
+                "auxillary_file_paths": [
+                    "results\\77-10v10-1M-Longer\\SingleAgent\\SingleAgent-1000193.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1000193,
+            "file_path": "results\\77-10v10-1M-Longer\\SingleAgent.onnx",
+            "reward": 0.5141175696078468,
+            "creation_time": 1624611163.8523364,
+            "auxillary_file_paths": [
+                "results\\77-10v10-1M-Longer\\SingleAgent\\SingleAgent-1000193.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.27.0",
+        "torch_version": "1.9.0+cu111"
+    }
+}

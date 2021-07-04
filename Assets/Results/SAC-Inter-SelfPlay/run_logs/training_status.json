@@ -1,0 +1,30 @@
+{
+    "SingleAgent": {
+        "elo": 1227.503164260623,
+        "checkpoints": [
+            {
+                "steps": 250029,
+                "file_path": "results\\88-self-250k\\SingleAgent\\SingleAgent-250029.onnx",
+                "reward": 0.0,
+                "creation_time": 1624745002.944857,
+                "auxillary_file_paths": [
+                    "results\\88-self-250k\\SingleAgent\\SingleAgent-250029.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 250029,
+            "file_path": "results\\88-self-250k\\SingleAgent.onnx",
+            "reward": 0.0,
+            "creation_time": 1624745002.944857,
+            "auxillary_file_paths": [
+                "results\\88-self-250k\\SingleAgent\\SingleAgent-250029.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.27.0",
+        "torch_version": "1.9.0+cu111"
+    }
+}

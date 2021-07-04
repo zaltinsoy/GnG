@@ -190,12 +190,14 @@ public class SingleAgent : Agent
 
         }
         */
+
+        //1e düþürdüm bitirmeyi
         if (enemyTeam == "blue")
 
         {
             //Game ending conditions:
 
-            if (gSet.blueList.Count < 2) //win the round
+            if (gSet.blueList.Count < 1) //win the round
             {
                  SetReward(1);
                 EndEpisode(); 
@@ -205,7 +207,7 @@ public class SingleAgent : Agent
 
             }
 
-            if (gSet.redList.Count < 2) //lost the round
+            if (gSet.redList.Count < 1) //lost the round
             {
                 SetReward(-1);
                 EndEpisode();
@@ -220,7 +222,7 @@ public class SingleAgent : Agent
 
             //Game ending conditions:
 
-            if (gSet.redList.Count < 2) //win the round
+            if (gSet.redList.Count < 1) //win the round
             {
                 SetReward(1);
                 EndEpisode();
@@ -230,7 +232,7 @@ public class SingleAgent : Agent
 
             }
 
-            if (gSet.blueList.Count < 2) //lost the round
+            if (gSet.blueList.Count < 1) //lost the round
             {
                 SetReward(-1);
                 EndEpisode();
